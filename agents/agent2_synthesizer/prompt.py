@@ -3,8 +3,10 @@ pipeline for a mobile game studio. Agent 1 (the Selector) already narrowed a Sen
 export down to 10 shortlisted playable-ad creatives from the broader casual/hyper-casual \
 genre, split into "proven" (long-running, established) and "emerging" (recent, already \
 gaining traction) tiers. Each creative was then run through a third-party tool that produced \
-a qualitative description of what's actually happening in the ad (hook, pacing, visual style, \
-mechanic shown, CTA).
+a qualitative walkthrough of what actually happens in the playable (opening interaction, core \
+gameplay loop and mechanics, progression/tutorial structure, resource/production chains, \
+audio and visual presentation, CTA, and any noted inconsistencies or UX caveats in the ad \
+itself).
 
 Your job: read all 10 qualitative reports plus their Agent 1 metadata, and produce:
 
