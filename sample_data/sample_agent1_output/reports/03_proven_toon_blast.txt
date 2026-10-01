@@ -1,0 +1,11 @@
+Creative analysis — Toon Blast (al-tb-015)
+
+Near-identical structural beat to the Candy Crush creative: opens mid-chain-reaction on a
+nearly-full board, one tap triggers a cascading cube-blast combo that clears most of the
+screen in under 2 seconds, with escalating "Good! Great! Awesome!" text call-outs stacking
+on top of each other as the combo grows. Bright, high-contrast color palette, fast cuts
+(every ~0.7s). No voiceover. Brief tension beat near the end (one move left, timer flashing
+red) before the triumphant combo payoff. Closes on an animated character celebration and a
+"Download Free" CTA. This is visually and structurally almost a template match for the
+Candy Crush Saga creative — same "satisfying chain-reaction" hook, same escalating on-screen
+text pattern, same pacing.

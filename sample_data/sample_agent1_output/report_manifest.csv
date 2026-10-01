@@ -1,0 +1,11 @@
+rank,report_filename,tier,app,networks,creative_link
+1,01_proven_candy_crush_saga.txt,proven,Candy Crush Saga,Meta,https://adlibrary.example.com/creative/ccs-combo-005
+2,02_proven_coin_master.txt,proven,Coin Master,TikTok,https://adlibrary.example.com/creative/cm-spin-010
+3,03_proven_toon_blast.txt,proven,Toon Blast,AppLovin,https://adlibrary.example.com/creative/al-tb-015
+4,04_proven_coin_master.txt,proven,Coin Master,Meta,https://adlibrary.example.com/creative/cm-spin-002
+5,05_proven_solitaire_grand_harvest.txt,proven,Solitaire Grand Harvest,TikTok,https://adlibrary.example.com/creative/sgh-win-004
+6,06_proven_gardenscapes.txt,proven,Gardenscapes,Meta,https://adlibrary.example.com/creative/gs-makeover-007
+7,07_emerging_vita_mahjong.txt,emerging,Vita Mahjong,AppLovin,https://adlibrary.example.com/creative/al-vm-017
+8,08_emerging_royal_match.txt,emerging,Royal Match,Meta,https://adlibrary.example.com/creative/rm-001
+9,09_emerging_monopoly_go.txt,emerging,Monopoly GO!,TikTok,https://adlibrary.example.com/creative/mg-finance-001
+10,10_emerging_block_blast.txt,emerging,Block Blast!,AppLovin,https://adlibrary.example.com/creative/al-bb-019

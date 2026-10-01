@@ -1,0 +1,10 @@
+Creative analysis — Coin Master (cm-spin-010)
+
+Cold open on a slot-style spin wheel mid-spin, landing on a "Village Raid" icon. Immediately
+cuts to a cartoon viking character smashing through an opponent's village wall in a satisfying
+slow-motion collapse with debris physics. Heavy emphasis on the social/competitive angle — a
+small on-screen banner reads "Steve just raided you!" to imply real-player stakes. Audio is a
+triumphant brass sting on each wall break. Second half shows the coin counter rapidly climbing
+with a cascading coin-pour animation. Ends on a "Raid Now" CTA over a leaderboard graphic
+showing the player's rank jumping up. Pacing is a bit slower than Candy Crush's (cuts every
+1.5-2s) but leans hard into competitive/rivalry framing rather than pure satisfaction.

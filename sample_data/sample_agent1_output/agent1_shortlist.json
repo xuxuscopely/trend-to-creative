@@ -1,0 +1,102 @@
+[
+  {
+    "app": "Candy Crush Saga",
+    "networks": "Meta",
+    "creative_link": "https://adlibrary.example.com/creative/ccs-combo-005",
+    "tier": "proven",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Proven: running 120 days (first seen 2025-06-01, last seen 2025-09-28) with 3.4% impression share (within Meta) across US,UK,FR,DE,BR.",
+    "report_filename": "01_proven_candy_crush_saga.txt"
+  },
+  {
+    "app": "Coin Master",
+    "networks": "TikTok",
+    "creative_link": "https://adlibrary.example.com/creative/cm-spin-010",
+    "tier": "proven",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Proven: running 80 days (first seen 2025-07-10, last seen 2025-09-28) with 1.9% impression share (within TikTok) across US,UK.",
+    "report_filename": "02_proven_coin_master.txt"
+  },
+  {
+    "app": "Toon Blast",
+    "networks": "AppLovin",
+    "creative_link": "https://adlibrary.example.com/creative/al-tb-015",
+    "tier": "proven",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Proven: running 1026 days (first seen 2023-12-10, last seen 2026-10-01) with 1.37% impression share (within AppLovin) across US.",
+    "report_filename": "03_proven_toon_blast.txt"
+  },
+  {
+    "app": "Coin Master",
+    "networks": "Meta",
+    "creative_link": "https://adlibrary.example.com/creative/cm-spin-002",
+    "tier": "proven",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Proven: running 88 days (first seen 2025-07-02, last seen 2025-09-28) with 2.1% impression share (within Meta) across US,UK,BR.",
+    "report_filename": "04_proven_coin_master.txt"
+  },
+  {
+    "app": "Solitaire Grand Harvest",
+    "networks": "TikTok",
+    "creative_link": "https://adlibrary.example.com/creative/sgh-win-004",
+    "tier": "proven",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Proven: running 30 days (first seen 2025-08-29, last seen 2025-09-28) with 0.4% impression share (within TikTok) across US,UK.",
+    "report_filename": "05_proven_solitaire_grand_harvest.txt"
+  },
+  {
+    "app": "Gardenscapes",
+    "networks": "Meta",
+    "creative_link": "https://adlibrary.example.com/creative/gs-makeover-007",
+    "tier": "proven",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Proven: running 95 days (first seen 2025-06-25, last seen 2025-09-28) with 1.5% impression share (within Meta) across US,UK,DE.",
+    "report_filename": "06_proven_gardenscapes.txt"
+  },
+  {
+    "app": "Vita Mahjong",
+    "networks": "AppLovin",
+    "creative_link": "https://adlibrary.example.com/creative/al-vm-017",
+    "tier": "emerging",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Emerging: running 480 days (first seen 2025-06-08, last seen 2026-10-01) with 5.05% impression share (within AppLovin) across US.",
+    "report_filename": "07_emerging_vita_mahjong.txt"
+  },
+  {
+    "app": "Royal Match",
+    "networks": "Meta",
+    "creative_link": "https://adlibrary.example.com/creative/rm-001",
+    "tier": "emerging",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Emerging: running 62 days (first seen 2025-07-28, last seen 2025-09-28) with 1.8% impression share (within Meta) across US,UK,DE,FR.",
+    "report_filename": "08_emerging_royal_match.txt"
+  },
+  {
+    "app": "Monopoly GO!",
+    "networks": "TikTok",
+    "creative_link": "https://adlibrary.example.com/creative/mg-finance-001",
+    "tier": "emerging",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Emerging: running 10 days (first seen 2025-09-18, last seen 2025-09-28) with 0.2% impression share (within TikTok) across US,CA.",
+    "report_filename": "09_emerging_monopoly_go.txt"
+  },
+  {
+    "app": "Block Blast!",
+    "networks": "AppLovin",
+    "creative_link": "https://adlibrary.example.com/creative/al-bb-019",
+    "tier": "emerging",
+    "tier_corrected": false,
+    "duplicate_flag": "",
+    "rationale": "Emerging: running 525 days (first seen 2025-04-24, last seen 2026-10-01) with 0.77% impression share (within AppLovin) across US.",
+    "report_filename": "10_emerging_block_blast.txt"
+  }
+]

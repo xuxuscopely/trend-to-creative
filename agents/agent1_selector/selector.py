@@ -17,8 +17,10 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -248,6 +250,30 @@ def fallback_rationale(records: list[dict]) -> list[dict]:
     return out
 
 
+def slugify(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
+
+
+def write_report_manifest(final: list[dict], out_dir: Path) -> Path:
+    """Assigns each shortlisted creative a filename for its qualitative
+    report and writes a manifest so Agent 2 can match report files back to
+    the right creative — reports come back one-per-creative from the
+    third-party analysis tool, so there's no reliable way to infer which
+    report belongs to which creative except by filename convention."""
+    for i, r in enumerate(final, 1):
+        r["report_filename"] = f"{i:02d}_{r['tier']}_{slugify(r['app'])}.txt"
+
+    manifest_path = out_dir / "report_manifest.csv"
+    with manifest_path.open("w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["rank", "report_filename", "tier", "app", "networks", "creative_link"])
+        for i, r in enumerate(final, 1):
+            writer.writerow(
+                [i, r["report_filename"], r["tier"], r["app"], r["networks"], r["creative_link"]]
+            )
+    return manifest_path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Agent 1 — Selector")
     parser.add_argument("--input", required=True, help="Path to Sensor Tower CSV export")
@@ -284,17 +310,25 @@ def main() -> None:
 
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = write_report_manifest(final, out_dir)
     out_json = out_dir / "agent1_shortlist.json"
     out_json.write_text(json.dumps(final, indent=2))
 
-    print(f"\nWrote {len(final)} selections to {out_json}\n")
+    print(f"\nWrote {len(final)} selections to {out_json}")
+    print(f"Wrote report filename manifest to {manifest_path}\n")
     for i, r in enumerate(final, 1):
         print(f"{i}. [{r['tier']}] {r['app']} ({r.get('networks', 'n/a')})")
         print(f"   {r['creative_link']}")
         print(f"   {r['rationale']}")
         if r.get("duplicate_flag"):
             print(f"   ⚠ duplicate flag: {r['duplicate_flag']}")
+        print(f"   -> save its report as: {r['report_filename']}")
         print()
+    print(
+        f"Next: run the 10 links above through your creative-analysis tool, save each "
+        f"report as a .txt file named exactly as shown above into one folder (e.g. "
+        f"{out_dir}/reports/), then run Agent 2 pointed at that folder."
+    )
 
 
 if __name__ == "__main__":

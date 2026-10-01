@@ -1,0 +1,11 @@
+Creative analysis — Candy Crush Saga (ccs-combo-005)
+
+Opens cold on a near-full board mid-combo: a single swipe triggers a cascading chain of
+candy matches that fills the entire screen within 2 seconds, each match punctuated by a
+rising chime and screen-shake. No logo, no VO for the first 3 seconds — the chain reaction
+itself is the hook. Mid-section cuts to a "almost lost, saved by one lucky swipe" beat with
+a red countdown timer, building tension before the payoff. Editing is fast (cuts every
+0.5-1s during the combo), bright oversaturated colors, large bold number counters ("+4,500!")
+flying off-screen. Ends on a UI shot of the level-complete screen with confetti and a
+"Play Now" CTA button overlay. No dialogue or narration anywhere in the 24s — it's 100%
+visual, sound-design-led satisfaction.
