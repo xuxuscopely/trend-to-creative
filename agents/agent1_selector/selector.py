@@ -117,11 +117,19 @@ def score_rows(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     impr_col = config.COLUMN_MAP["impression_share"]
     first_seen_col = config.COLUMN_MAP["first_seen"]
+    networks_col = config.COLUMN_MAP["networks"]
 
-    df["_impression_pct"] = df[impr_col].rank(pct=True)
-    df["_duration_pct"] = df["_duration_days"].rank(pct=True)
+    # Rank within each network, not globally: networks differ wildly in how
+    # long creatives typically run and how impression share is distributed
+    # (e.g. AppLovin creatives can run for years; Meta/TikTok rotate much
+    # faster), so a global percentile just rewards whichever network has
+    # structurally bigger numbers instead of surfacing genuinely strong
+    # creatives on each channel.
+    grouped = df.groupby(networks_col)
+    df["_impression_pct"] = grouped[impr_col].rank(pct=True)
+    df["_duration_pct"] = grouped["_duration_days"].rank(pct=True)
     # Later first-seen date -> larger rank -> higher recency score.
-    df["_recency_pct"] = df[first_seen_col].rank(pct=True)
+    df["_recency_pct"] = grouped[first_seen_col].rank(pct=True)
 
     pw, ew = config.PROVEN_WEIGHTS, config.EMERGING_WEIGHTS
     df["_proven_score"] = (
@@ -135,7 +143,9 @@ def score_rows(df: pd.DataFrame) -> pd.DataFrame:
 
 def select_shortlist(df: pd.DataFrame) -> pd.DataFrame:
     adv_col = config.COLUMN_MAP["advertiser"]
+    net_col = config.COLUMN_MAP["networks"]
     advertiser_counts: dict[str, int] = {}
+    network_counts: dict[str, int] = {}
     picked_idx: list[int] = []
     tiers: dict[int, str] = {}
 
@@ -147,16 +157,21 @@ def select_shortlist(df: pd.DataFrame) -> pd.DataFrame:
             if idx in picked_idx:
                 continue
             advertiser = row[adv_col]
+            network = row[net_col]
             if advertiser_counts.get(advertiser, 0) >= config.MAX_PER_ADVERTISER:
+                continue
+            if network_counts.get(network, 0) >= config.MAX_PER_NETWORK:
                 continue
             picked_idx.append(idx)
             tiers[idx] = tier
             advertiser_counts[advertiser] = advertiser_counts.get(advertiser, 0) + 1
+            network_counts[network] = network_counts.get(network, 0) + 1
             taken += 1
         if taken < n:
             print(
                 f"Warning: only found {taken}/{n} '{tier}' picks within the "
-                f"max-{config.MAX_PER_ADVERTISER}-per-advertiser cap.",
+                f"max-{config.MAX_PER_ADVERTISER}-per-advertiser / "
+                f"max-{config.MAX_PER_NETWORK}-per-network caps.",
                 file=sys.stderr,
             )
 
@@ -178,8 +193,8 @@ def shortlist_to_records(shortlist: pd.DataFrame) -> list[dict]:
                 "creative_link": row[cm["creative_link"]],
                 "networks": row[cm["networks"]],
                 "tier": row["_tier"],
-                "impression_share": row[cm["impression_share"]],
-                "duration_days": row["_duration_days"],
+                "impression_share_pct": round(row[cm["impression_share"]] * 100, 3),
+                "duration_days": int(row["_duration_days"]),
                 "first_seen": row[cm["first_seen"]].date().isoformat(),
                 "last_seen": row[cm["last_seen"]].date().isoformat(),
                 "countries": row[cm["countries"]],
@@ -215,9 +230,9 @@ def fallback_rationale(records: list[dict]) -> list[dict]:
     for r in records:
         rationale = (
             f"{'Proven' if r['tier'] == 'proven' else 'Emerging'}: running "
-            f"{r['duration_days']:.0f} days (first seen {r['first_seen']}, last seen "
-            f"{r['last_seen']}) with {r['impression_share']} impression share across "
-            f"{r['countries']} on {r['networks']}."
+            f"{r['duration_days']} days (first seen {r['first_seen']}, last seen "
+            f"{r['last_seen']}) with {r['impression_share_pct']}% impression share "
+            f"(within {r['networks']}) across {r['countries']}."
         )
         out.append(
             {

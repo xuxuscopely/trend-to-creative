@@ -37,8 +37,9 @@ AD_TYPE_KEYWORDS = ["playable"]
 TOP_PROVEN = 6
 TOP_EMERGING = 4
 
-# No single advertiser should dominate the shortlist.
+# No single advertiser, and no single network, should dominate the shortlist.
 MAX_PER_ADVERTISER = 3
+MAX_PER_NETWORK = 4
 
 # Weights for the two composite scores (must each sum to 1.0).
 PROVEN_WEIGHTS = {"impression_share": 0.6, "duration": 0.4}
