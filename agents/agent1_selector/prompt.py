@@ -45,7 +45,7 @@ FINALIZE_TOOL = {
                     "type": "object",
                     "properties": {
                         "app": {"type": "string"},
-                        "advertiser": {"type": "string"},
+                        "networks": {"type": "string"},
                         "creative_link": {"type": "string"},
                         "tier": {"type": "string", "enum": ["proven", "emerging"]},
                         "tier_corrected": {
@@ -63,7 +63,7 @@ FINALIZE_TOOL = {
                     },
                     "required": [
                         "app",
-                        "advertiser",
+                        "networks",
                         "creative_link",
                         "tier",
                         "tier_corrected",

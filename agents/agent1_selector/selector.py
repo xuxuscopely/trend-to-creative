@@ -177,8 +177,8 @@ def shortlist_to_records(shortlist: pd.DataFrame) -> list[dict]:
         records.append(
             {
                 "app": row[cm["app"]],
-                "advertiser": row[cm["advertiser"]],
                 "creative_link": row[cm["creative_link"]],
+                "networks": row[cm["networks"]],
                 "tier": row["_tier"],
                 "impression_share": row[cm["impression_share"]],
                 "duration_days": row["_duration_days"],
@@ -219,12 +219,12 @@ def fallback_rationale(records: list[dict]) -> list[dict]:
             f"{'Proven' if r['tier'] == 'proven' else 'Emerging'}: running "
             f"{r['duration_days']:.0f} days (first seen {r['first_seen']}, last seen "
             f"{r['last_seen']}) with {r['impression_share']} impression share across "
-            f"{r['countries']}."
+            f"{r['countries']} on {r['networks']}."
         )
         out.append(
             {
                 "app": r["app"],
-                "advertiser": r["advertiser"],
+                "networks": r["networks"],
                 "creative_link": r["creative_link"],
                 "tier": r["tier"],
                 "tier_corrected": False,
@@ -276,7 +276,7 @@ def main() -> None:
 
     print(f"\nWrote {len(final)} selections to {out_json}\n")
     for i, r in enumerate(final, 1):
-        print(f"{i}. [{r['tier']}] {r['app']} — {r['advertiser']}")
+        print(f"{i}. [{r['tier']}] {r['app']} ({r.get('networks', 'n/a')})")
         print(f"   {r['creative_link']}")
         print(f"   {r['rationale']}")
         if r.get("duplicate_flag"):

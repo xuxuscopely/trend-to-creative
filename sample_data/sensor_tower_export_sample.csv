@@ -1,16 +1,16 @@
-Advertiser,App,Creative Link,Duration,First Seen,Last Seen,Impression Share,Countries,Type,Format,Ad Objectives,Placements,Dimensions,Video Duration
-Playrix,Royal Match,https://adlibrary.example.com/creative/rm-001,62,2025-07-28,2025-09-28,1.8,"US,UK,DE,FR",Video,Video,App Install,"Feed,Reels","1080x1920",22
-Scopely,Monopoly GO!,https://adlibrary.example.com/creative/mg-finance-001,10,2025-09-18,2025-09-28,0.2,"US,CA",Video,Video,App Install,"Reels,Stories","1080x1920",15
-Moon Active,Coin Master,https://adlibrary.example.com/creative/cm-spin-002,88,2025-07-02,2025-09-28,2.1,"US,UK,BR",Video,Video,App Install,"Feed,Reels","1080x1920",18
-Playtika,Board Kings,https://adlibrary.example.com/creative/bk-roll-003,45,2025-08-14,2025-09-28,0.6,"US,DE",Video,Video,App Install,"Feed","1080x1920",20
-Zynga,Solitaire Grand Harvest,https://adlibrary.example.com/creative/sgh-win-004,30,2025-08-29,2025-09-28,0.4,"US,UK",Video,Video,App Install,"Reels","1080x1920",16
-King,Candy Crush Saga,https://adlibrary.example.com/creative/ccs-combo-005,120,2025-06-01,2025-09-28,3.4,"US,UK,FR,DE,BR",Video,Video,App Install,"Feed,Reels,Stories","1080x1920",24
-Rovio,Angry Birds 2,https://adlibrary.example.com/creative/ab2-blast-006,15,2025-09-13,2025-09-28,0.15,"US",Video,Video,App Install,"Reels","1080x1920",14
-Playrix,Gardenscapes,https://adlibrary.example.com/creative/gs-makeover-007,95,2025-06-25,2025-09-28,1.5,"US,UK,DE",Video,Video,App Install,"Feed","1080x1920",21
-Jam City,Cookie Jam,https://adlibrary.example.com/creative/cj-match-008,6,2025-09-22,2025-09-28,0.1,"US",Video,Video,App Install,"Reels","1080x1920",12
-SciPlay,Jackpot Party,https://adlibrary.example.com/creative/jp-slots-009,8,2025-09-20,2025-09-28,0.25,"US,CA",Video,Video,App Install,"Feed,Reels","1080x1920",17
-Moon Active,Coin Master,https://adlibrary.example.com/creative/cm-spin-010,80,2025-07-10,2025-09-28,1.9,"US,UK",Video,Video,App Install,"Feed","1080x1920",18
-Big Fish Games,Gummy Drop!,https://adlibrary.example.com/creative/gd-sweet-011,25,2025-09-03,2025-09-28,0.3,"US,UK",Video,Video,App Install,"Reels","1080x1920",19
-King,Candy Crush Saga,https://adlibrary.example.com/creative/ccs-fever-012,3,2025-09-25,2025-09-28,0.05,"US",Video,Video,Engagement,"Feed","1080x1920",10
-Peak Games,Toon Blast,https://adlibrary.example.com/creative/tb-explosion-013,70,2025-07-20,2025-09-28,1.2,"US,UK,DE",Video,Video,App Install,"Feed,Reels","1080x1920",20
-Playtika,Board Kings,https://adlibrary.example.com/creative/bk-roll-014,40,2025-08-19,2025-09-28,0.55,"US,DE",Image,Image,App Install,"Feed","1080x1080",0
+Advertiser App ID,Advertiser App Name,Creative URL,Networks,Duration,First Seen,Last Seen,Impression Share,Countries,Type,Format,Ad Objectives,Placements,Dimensions,Video Duration
+1001,Royal Match,https://adlibrary.example.com/creative/rm-001,Meta,62,2025-07-28,2025-09-28,1.8,"US,UK,DE,FR",Video,Video,App Install,"Feed,Reels","1080x1920",22
+1002,Monopoly GO!,https://adlibrary.example.com/creative/mg-finance-001,TikTok,10,2025-09-18,2025-09-28,0.2,"US,CA",Video,Video,App Install,"Reels,Stories","1080x1920",15
+1003,Coin Master,https://adlibrary.example.com/creative/cm-spin-002,Meta,88,2025-07-02,2025-09-28,2.1,"US,UK,BR",Video,Video,App Install,"Feed,Reels","1080x1920",18
+1004,Board Kings,https://adlibrary.example.com/creative/bk-roll-003,Meta,45,2025-08-14,2025-09-28,0.6,"US,DE",Video,Video,App Install,"Feed","1080x1920",20
+1005,Solitaire Grand Harvest,https://adlibrary.example.com/creative/sgh-win-004,TikTok,30,2025-08-29,2025-09-28,0.4,"US,UK",Video,Video,App Install,"Reels","1080x1920",16
+1006,Candy Crush Saga,https://adlibrary.example.com/creative/ccs-combo-005,Meta,120,2025-06-01,2025-09-28,3.4,"US,UK,FR,DE,BR",Video,Video,App Install,"Feed,Reels,Stories","1080x1920",24
+1007,Angry Birds 2,https://adlibrary.example.com/creative/ab2-blast-006,TikTok,15,2025-09-13,2025-09-28,0.15,"US",Video,Video,App Install,"Reels","1080x1920",14
+1008,Gardenscapes,https://adlibrary.example.com/creative/gs-makeover-007,Meta,95,2025-06-25,2025-09-28,1.5,"US,UK,DE",Video,Video,App Install,"Feed","1080x1920",21
+1009,Cookie Jam,https://adlibrary.example.com/creative/cj-match-008,TikTok,6,2025-09-22,2025-09-28,0.1,"US",Video,Video,App Install,"Reels","1080x1920",12
+1010,Jackpot Party,https://adlibrary.example.com/creative/jp-slots-009,Meta,8,2025-09-20,2025-09-28,0.25,"US,CA",Video,Video,App Install,"Feed,Reels","1080x1920",17
+1003,Coin Master,https://adlibrary.example.com/creative/cm-spin-010,TikTok,80,2025-07-10,2025-09-28,1.9,"US,UK",Video,Video,App Install,"Feed","1080x1920",18
+1011,Gummy Drop!,https://adlibrary.example.com/creative/gd-sweet-011,Meta,25,2025-09-03,2025-09-28,0.3,"US,UK",Video,Video,App Install,"Reels","1080x1920",19
+1006,Candy Crush Saga,https://adlibrary.example.com/creative/ccs-fever-012,Meta,3,2025-09-25,2025-09-28,0.05,"US",Video,Video,Engagement,"Feed","1080x1920",10
+1012,Toon Blast,https://adlibrary.example.com/creative/tb-explosion-013,Meta,70,2025-07-20,2025-09-28,1.2,"US,UK,DE",Video,Video,App Install,"Feed,Reels","1080x1920",20
+1004,Board Kings,https://adlibrary.example.com/creative/bk-roll-014,Meta,40,2025-08-19,2025-09-28,0.55,"US,DE",Image,Image,App Install,"Feed","1080x1080",0

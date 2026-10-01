@@ -5,9 +5,13 @@ nothing else in selector.py needs to change.
 """
 
 COLUMN_MAP = {
-    "advertiser": "Advertiser",
-    "app": "App",
-    "creative_link": "Creative Link",
+    # This export has no separate studio/publisher column — "Advertiser App
+    # Name" is the closest thing to both "advertiser" and "app", so both
+    # keys point at it. The per-advertiser diversity cap groups on this.
+    "advertiser": "Advertiser App Name",
+    "app": "Advertiser App Name",
+    "creative_link": "Creative URL",
+    "networks": "Networks",
     "duration": "Duration",
     "first_seen": "First Seen",
     "last_seen": "Last Seen",
