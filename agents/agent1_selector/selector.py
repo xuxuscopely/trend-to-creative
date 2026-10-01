@@ -29,8 +29,30 @@ import config  # noqa: E402
 from prompt import SYSTEM_PROMPT, FINALIZE_TOOL, build_user_message  # noqa: E402
 
 
+def _read_csv_robust(input_path: str) -> pd.DataFrame:
+    """Sensor Tower/Excel exports are often UTF-16 or tab-delimited rather
+    than plain UTF-8 comma-separated — try the common combinations instead
+    of making the user guess."""
+    last_err: Exception | None = None
+    for encoding in ("utf-8", "utf-8-sig", "utf-16", "latin-1"):
+        try:
+            return pd.read_csv(input_path, encoding=encoding)
+        except UnicodeError as e:
+            last_err = e
+        except pd.errors.ParserError as e:
+            try:
+                return pd.read_csv(input_path, encoding=encoding, sep=None, engine="python")
+            except Exception as e2:
+                last_err = e2
+    raise RuntimeError(
+        f"Could not read {input_path} as UTF-8, UTF-16, or Latin-1 CSV. "
+        f"Try re-exporting it as a plain CSV. Original error: {last_err}"
+    )
+
+
 def load_data(input_path: str) -> pd.DataFrame:
-    df = pd.read_csv(input_path)
+    df = _read_csv_robust(input_path)
+    df.columns = [c.strip() for c in df.columns]
     missing = [col for col in config.COLUMN_MAP.values() if col not in df.columns]
     if missing:
         raise ValueError(
