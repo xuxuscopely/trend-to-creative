@@ -28,9 +28,10 @@ COLUMN_MAP = {
 # Case-insensitive substring match against the Ad Objectives column.
 INSTALL_OBJECTIVE_KEYWORDS = ["install"]
 
-# Case-insensitive substring match against Format (falls back to Type if
-# Format doesn't contain any of these).
-VIDEO_FORMAT_KEYWORDS = ["video"]
+# Case-insensitive substring match against the Type column. The real export
+# only contains "playable" (no "video" rows at all) — this pipeline is for
+# playable-ad research, so that's exactly what we want.
+AD_TYPE_KEYWORDS = ["playable"]
 
 # Final shortlist composition.
 TOP_PROVEN = 6

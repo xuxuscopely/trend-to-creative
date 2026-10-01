@@ -99,17 +99,15 @@ def filter_rows(df: pd.DataFrame) -> pd.DataFrame:
         .str.contains("|".join(config.INSTALL_OBJECTIVE_KEYWORDS), case=False, na=False)
     )
 
-    fmt_col = config.COLUMN_MAP["format"]
     type_col = config.COLUMN_MAP["type"]
-    video_pattern = "|".join(config.VIDEO_FORMAT_KEYWORDS)
-    video_mask = df[fmt_col].astype(str).str.contains(
-        video_pattern, case=False, na=False
-    ) | df[type_col].astype(str).str.contains(video_pattern, case=False, na=False)
+    type_mask = df[type_col].astype(str).str.contains(
+        "|".join(config.AD_TYPE_KEYWORDS), case=False, na=False
+    )
 
-    filtered = df[install_mask & video_mask].copy()
+    filtered = df[install_mask & type_mask].copy()
     print(
         f"Filtered {len(df)} -> {len(filtered)} rows "
-        f"(install objective + video format/type).",
+        f"(install objective + {'/'.join(config.AD_TYPE_KEYWORDS)} type).",
         file=sys.stderr,
     )
     return filtered
