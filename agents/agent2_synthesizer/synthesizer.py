@@ -1,10 +1,14 @@
 """Agent 2 — Trend Synthesizer.
 
 Takes Agent 1's shortlist (agent1_shortlist.json) plus the qualitative creative-analysis
-reports a human ran through a third-party tool (one .txt file per creative, named per
-Agent 1's report_manifest.csv), and clusters them into a small number of trend archetypes
-with metrics-grounded justification — the "research summary + why we should catch this
-trend" deliverable.
+reports a human ran through a third-party tool, and clusters them into a small number of
+trend archetypes with metrics-grounded justification — the "research summary + why we
+should catch this trend" deliverable.
+
+Reports can be supplied two ways:
+  --reports-dir           one .txt file per creative, named per report_manifest.csv
+  --combined-reports-file one file with all reports pasted together, unlabeled — Claude
+                           matches each section to the right creative itself
 
 Usage:
     python synthesizer.py \\
@@ -13,6 +17,9 @@ Usage:
         --no-llm
 
     python synthesizer.py --shortlist output/agent1_shortlist.json --reports-dir output/reports
+
+    python synthesizer.py --shortlist output/agent1_shortlist.json \\
+        --combined-reports-file output/all_summaries.txt
 """
 
 from __future__ import annotations
@@ -25,7 +32,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import config  # noqa: E402
-from prompt import SYSTEM_PROMPT, SYNTHESIZE_TOOL, build_user_message  # noqa: E402
+from prompt import (  # noqa: E402
+    SYSTEM_PROMPT,
+    SYNTHESIZE_TOOL,
+    build_user_message,
+    build_user_message_combined,
+)
 
 
 def load_shortlist(shortlist_path: str) -> list[dict]:
@@ -67,6 +79,46 @@ def attach_reports(shortlist: list[dict], reports_dir: str) -> list[dict]:
             file=sys.stderr,
         )
     return combined
+
+
+def load_combined_reports(path: str) -> str:
+    text = Path(path).read_text().strip()
+    if not text:
+        raise ValueError(f"{path} is empty.")
+    return text
+
+
+def synthesize_with_llm_combined(shortlist: list[dict], combined_text: str, model: str) -> dict:
+    import anthropic
+
+    client = anthropic.Anthropic()
+    response = client.messages.create(
+        model=model,
+        max_tokens=4096,
+        system=SYSTEM_PROMPT,
+        tools=[SYNTHESIZE_TOOL],
+        tool_choice={"type": "tool", "name": "synthesize_trends"},
+        messages=[{"role": "user", "content": build_user_message_combined(shortlist, combined_text)}],
+    )
+    for block in response.content:
+        if block.type == "tool_use" and block.name == "synthesize_trends":
+            return block.input
+    raise RuntimeError("Claude did not return a synthesize_trends tool call.")
+
+
+def fallback_synthesis_combined(shortlist: list[dict], combined_text: str) -> dict:
+    """Used when --no-llm is set or no API key is configured. Matching reports to
+    creatives by game name requires the LLM, so there's no meaningful placeholder
+    beyond confirming the inputs loaded."""
+    return {
+        "executive_summary": (
+            f"[placeholder] {len(shortlist)} shortlisted creatives and "
+            f"{len(combined_text)} characters of combined report text loaded; "
+            f"no matching or synthesis performed (--no-llm)."
+        ),
+        "trend_archetypes": [],
+        "overall_justification": "Run without --no-llm — matching reports to creatives needs the LLM.",
+    }
 
 
 def synthesize_with_llm(combined: list[dict], model: str) -> dict:
@@ -132,7 +184,17 @@ def fallback_synthesis(combined: list[dict]) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Agent 2 — Trend Synthesizer")
     parser.add_argument("--shortlist", required=True, help="Path to agent1_shortlist.json")
-    parser.add_argument("--reports-dir", required=True, help="Directory of per-creative .txt reports")
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument(
+        "--reports-dir", help="Directory of per-creative .txt reports, named per report_manifest.csv"
+    )
+    input_group.add_argument(
+        "--combined-reports-file",
+        help=(
+            "A single file containing all reports pasted together, unlabeled — Claude "
+            "matches each section to the right creative by the game name in its text."
+        ),
+    )
     parser.add_argument("--output-dir", default="output")
     parser.add_argument("--model", default=config.DEFAULT_MODEL)
     parser.add_argument(
@@ -141,8 +203,6 @@ def main() -> None:
     args = parser.parse_args()
 
     shortlist = load_shortlist(args.shortlist)
-    combined = attach_reports(shortlist, args.reports_dir)
-
     use_llm = not args.no_llm and bool(os.environ.get("ANTHROPIC_API_KEY"))
     if not args.no_llm and not use_llm:
         print(
@@ -150,7 +210,17 @@ def main() -> None:
             "(pass --no-llm to silence this).",
             file=sys.stderr,
         )
-    result = synthesize_with_llm(combined, args.model) if use_llm else fallback_synthesis(combined)
+
+    if args.combined_reports_file:
+        combined_text = load_combined_reports(args.combined_reports_file)
+        result = (
+            synthesize_with_llm_combined(shortlist, combined_text, args.model)
+            if use_llm
+            else fallback_synthesis_combined(shortlist, combined_text)
+        )
+    else:
+        combined = attach_reports(shortlist, args.reports_dir)
+        result = synthesize_with_llm(combined, args.model) if use_llm else fallback_synthesis(combined)
 
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

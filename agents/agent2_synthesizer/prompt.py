@@ -39,6 +39,25 @@ def build_user_message(combined_records: list[dict]) -> str:
     )
 
 
+def build_user_message_combined(shortlist: list[dict], combined_text: str) -> str:
+    import json
+
+    stripped = [{k: v for k, v in r.items() if k != "rationale"} for r in shortlist]
+    return (
+        "Shortlisted creatives with Agent 1 metadata (no report attached yet):\n\n"
+        f"{json.dumps(stripped, indent=2, default=str)}\n\n"
+        "The qualitative reports below are pasted as ONE combined block of text, not "
+        "pre-split or labeled per creative. Each section discusses one specific app from "
+        "the shortlist above (the app/game name is mentioned within its own text) — before "
+        "synthesizing anything, first work out which section of text belongs to which app "
+        "in the shortlist using the names mentioned in the text itself. Some shortlisted "
+        "apps may have no matching section if their report wasn't included; don't force a "
+        "match for those, and don't invent a match that isn't actually supported by the "
+        "text.\n\n"
+        f"--- COMBINED REPORTS TEXT ---\n{combined_text}"
+    )
+
+
 SYNTHESIZE_TOOL = {
     "name": "synthesize_trends",
     "description": "Return the clustered trend archetypes and overall justification.",
